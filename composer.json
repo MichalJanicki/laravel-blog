@@ -1,5 +1,5 @@
 {
-    "name": "binshops/laravel-blog",
+    "name": "michal-janicki/laravel-blog",
     "keywords": [
         "laravel",
         "blog",
@@ -55,8 +55,7 @@
             "providers": [
                 "BinshopsBlog\\BinshopsBlogServiceProvider"
             ],
-            "aliases": {
-            }
+            "aliases": {}
         }
     }
 }
