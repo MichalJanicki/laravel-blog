@@ -1,4 +1,4 @@
-@extends("binshopsblog_admin::layouts.admin_layout")
+@extends("BinshopsBlog_admin::layouts.admin_layout")
 @section("content")
 
     @forelse ($comments as $comment)
