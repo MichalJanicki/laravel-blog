@@ -15,11 +15,11 @@ Route::group(['middleware' => ['web'], 'namespace' => '\BinshopsBlog\Controllers
         Route::get('/feed', 'BinshopsBlogRssFeedController@feed')
             ->name('binshopsblog.feed'); //RSS feed
 
-        Route::get('/category{subcategories}', 'BinshopsBlogReaderController@view_category')->where('subcategories', '^[a-zA-Z0-9-_\/]+$')->name('binshopsblog.view_category');
+        // Route::get('/category{subcategories}', 'BinshopsBlogReaderController@view_category')->where('subcategories', '^[a-zA-Z0-9-_\/]+$')->name('binshopsblog.view_category');
 
-//        Route::get('/category/{categorySlug}',
-//            'BinshopsBlogReaderController@view_category')
-//            ->name('binshopsblog.view_category');
+       Route::get('/category/{categorySlug}',
+           'BinshopsBlogReaderController@view_category')
+           ->name('binshopsblog.view_category');
 
         Route::get('/{blogPostSlug}',
             'BinshopsBlogReaderController@viewSinglePost')
