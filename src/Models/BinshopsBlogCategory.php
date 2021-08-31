@@ -31,11 +31,11 @@ class BinshopsBlogCategory extends Node
      */
     public function url()
     {
-        $theChainString = "";
         $chain = $this->getAncestorsAndSelf();
-        foreach ($chain as $category){
-            $theChainString .=  "/" . $category->slug;
-        }
+
+        $list = $chain->pluck('slug');
+        $theChainString = $list->join('/');
+
         return route("binshopsblog.view_category", $theChainString);
     }
 
