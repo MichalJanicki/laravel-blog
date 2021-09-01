@@ -24,18 +24,30 @@
 
     }
 </script>
+
+<div class="form-group">
+    <label for="category_category_name">Page title (<code>title</code> tag)</label>
+
+    <input type="text" maxlength="65" class="form-control" id="category_page_title" oninput="populate_slug_field();"
+        required aria-describedby="category_page_title_help" name='page_title'
+        value="{{old("page_title",$category->page_title)}}">
+
+    <small id="category_page_title_help" class="form-text text-muted">Maximum length 65 characters</small>
+</div>
+
+<div class="form-group">
+    <label for="page_description">Page description</label>
+    <textarea name='page_description' class='form-control' required maxlength="160"
+        id='page_description'>{{old("page_description",$category->page_description)}}</textarea>
+</div>
+
+
 <div class="form-group">
     <label for="category_category_name">Category Name</label>
 
-    <input type="text"
-           class="form-control"
-           id="category_category_name"
-           oninput="populate_slug_field();"
-           required
-           aria-describedby="category_category_name_help"
-           name='category_name'
-           value="{{old("category_name",$category->category_name)}}"
-    >
+    <input type="text" class="form-control" id="category_category_name" oninput="populate_slug_field();" required
+        aria-describedby="category_category_name_help" name='category_name'
+        value="{{old("category_name",$category->category_name)}}">
 
     <small id="category_category_name_help" class="form-text text-muted">The name of the category</small>
 </div>
@@ -43,22 +55,14 @@
 
 <div class="form-group">
     <label for="category_slug">Category slug</label>
-    <input
-            maxlength='100'
-            pattern="[a-zA-Z0-9-]+"
-            type="text"
-            required
-            class="form-control"
-            id="category_slug"
-            oninput="SHOULD_AUTO_GEN_SLUG=false;"
-            aria-describedby="category_slug_help"
-            name='slug'
-            value="{{old("slug",$category->slug)}}"
-    >
+    <input maxlength='100' pattern="[a-zA-Z0-9-]+" type="text" required class="form-control" id="category_slug"
+        oninput="SHOULD_AUTO_GEN_SLUG=false;" aria-describedby="category_slug_help" name='slug'
+        value="{{old("slug",$category->slug)}}">
 
     <small id="category_slug_help" class="form-text text-muted">
         Letters, numbers, dash only. The slug
-        i.e. {{route("binshopsblog.view_category","")}}/<u><em>this_part</em></u>. This must be unique (two categories can't
+        i.e. {{route("binshopsblog.view_category","")}}/<u><em>this_part</em></u>. This must be unique (two categories
+        can't
         share the same slug).
 
     </small>
@@ -66,13 +70,12 @@
 
 <div class="form-group">
     <label for="category_slug">Parent Category</label>
-    <select name='is_published' class='form-control' id='blog_is_published'
-            aria-describedby='blog_is_published_help'>
+    <select name='is_published' class='form-control' id='blog_is_published' aria-describedby='blog_is_published_help'>
 
-        <option  selected='selected' value='1'>
+        <option selected='selected' value='1'>
             Published
         </option>
-        <option  selected='selected' value='0'>Not
+        <option selected='selected' value='0'>Not
             Published
         </option>
 
@@ -82,9 +85,8 @@
 
 <div class="form-group">
     <label for="category_description">Category Description (optional)</label>
-    <textarea name='category_description'
-              class='form-control'
-    id='category_description'>{{old("category_description",$category->category_description)}}</textarea>
+    <textarea name='category_description' class='form-control'
+        id='category_description'>{{old("category_description",$category->category_description)}}</textarea>
 
 </div>
 

@@ -14,7 +14,9 @@ class BinshopsBlogCategory extends Node
         'category_name',
         'slug',
         'category_description',
-        'parent_id'
+        'parent_id',
+        'page_title',
+        'page_description',
     ];
 
     /**
