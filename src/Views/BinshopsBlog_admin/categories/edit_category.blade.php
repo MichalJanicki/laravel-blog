@@ -2,15 +2,16 @@
 @section("content")
 
 
-    <h5>Admin - Edit Category</h5>
+<h5>Admin - Edit Category</h5>
 
-    <form method='post' action='{{route("binshopsblog.admin.categories.edit_category",$category->id)}}'  enctype="multipart/form-data" >
+<form method='post' action='{{route("binshopsblog.admin.categories.edit_category",$category->id)}}'
+    enctype="multipart/form-data">
 
-        @csrf
-        @method("patch")
+    @csrf
+    @method("patch")
 
-        <script>
-            SHOULD_AUTO_GEN_SLUG = false;
+    <script>
+        SHOULD_AUTO_GEN_SLUG = false;
 
             /* Generate the slug field, if it was not touched by the user (or if it was an empty string) */
             function populate_slug_field() {
@@ -34,82 +35,84 @@
                 }
 
             }
-        </script>
-        <div class="form-group">
-            <label for="category_category_name">Category Name</label>
+    </script>
 
-            <input type="text"
-                   class="form-control"
-                   id="category_category_name"
-                   oninput="populate_slug_field();"
-                   required
-                   aria-describedby="category_category_name_help"
-                   name='category_name'
-                   value="{{old("category_name",$category->category_name)}}"
-            >
+    <div class="form-group">
+        <label for="category_category_name">Page title <code>title</code> tag</label>
 
-            <small id="category_category_name_help" class="form-text text-muted">The name of the category</small>
-        </div>
+        <input type="text" maxlength="65" class="form-control" id="category_page_title" oninput="populate_slug_field();"
+            required aria-describedby="category_page_title_help" name='page_title'
+            value="{{old("page_title",$category->page_title)}}">
 
+        <small id="category_page_title_help" class="form-text text-muted">Maximum length 65 characters</small>
+    </div>
 
-        <div class="form-group">
-            <label for="category_slug">Category slug</label>
-            <input
-                maxlength='100'
-                pattern="[a-zA-Z0-9-]+"
-                type="text"
-                required
-                class="form-control"
-                id="category_slug"
-                oninput="SHOULD_AUTO_GEN_SLUG=false;"
-                aria-describedby="category_slug_help"
-                name='slug'
-                value="{{old("slug",$category->slug)}}"
-            >
+    <div class="form-group">
+        <label for="page_description">Page description</label>
+        <textarea name='page_description' class='form-control' required
+            id='page_description'>{{old("page_description",$category->page_description)}}</textarea>
+    </div>
 
-            <small id="category_slug_help" class="form-text text-muted">
-                Letters, numbers, dash only. The slug
-                i.e. {{route("binshopsblog.view_category","")}}/<u><em>this_part</em></u>. This must be unique (two categories can't
-                share the same slug).
+    <div class="form-group">
+        <label for="category_category_name">Category Name</label>
 
-            </small>
-        </div>
+        <input type="text" class="form-control" id="category_category_name" oninput="populate_slug_field();" required
+            aria-describedby="category_category_name_help" name='category_name'
+            value="{{old("category_name",$category->category_name)}}">
 
-        <div class="form-group">
-            <label for="category_slug">Parent Category</label>
-            <select name='parent_id' class='form-control'>
-                <option @if($category->parent_id == 0) selected='selected' @endif value='0'>
-                    Root
-                </option>
-                @foreach($categories_list as $category2)
-                    @if($category->id != $category2->id)
-                    <option @if($category->parent_id == $category2->id) selected='selected' @endif value='{{$category2->id}}'>
-                        {{$category2->category_name}}
-                    </option>
-                    @endif
-                @endforeach
-            </select>
-        </div>
+        <small id="category_category_name_help" class="form-text text-muted">The name of the category</small>
+    </div>
 
 
-        <div class="form-group">
-            <label for="category_description">Category Description (optional)</label>
-            <textarea name='category_description'
-                      class='form-control'
-                      id='category_description'>{{old("category_description",$category->category_description)}}</textarea>
+    <div class="form-group">
+        <label for="category_slug">Category slug</label>
+        <input maxlength='100' pattern="[a-zA-Z0-9-]+" type="text" required class="form-control" id="category_slug"
+            oninput="SHOULD_AUTO_GEN_SLUG=false;" aria-describedby="category_slug_help" name='slug'
+            value="{{old("slug",$category->slug)}}">
 
-        </div>
+        <small id="category_slug_help" class="form-text text-muted">
+            Letters, numbers, dash only. The slug
+            i.e. {{route("binshopsblog.view_category","")}}/<u><em>this_part</em></u>. This must be unique (two
+            categories can't
+            share the same slug).
 
-        <script>
-            if (document.getElementById("category_slug").value.length < 1) {
+        </small>
+    </div>
+
+    <div class="form-group">
+        <label for="category_slug">Parent Category</label>
+        <select name='parent_id' class='form-control'>
+            <option @if($category->parent_id == 0) selected='selected' @endif value='0'>
+                Root
+            </option>
+            @foreach($categories_list as $category2)
+            @if($category->id != $category2->id)
+            <option @if($category->parent_id == $category2->id) selected='selected' @endif value='{{$category2->id}}'>
+                {{$category2->category_name}}
+            </option>
+            @endif
+            @endforeach
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <label for="category_description">Category Description (optional)</label>
+        <textarea name='category_description' class='form-control'
+            id='category_description'>{{old("category_description",$category->category_description)}}</textarea>
+
+    </div>
+
+    <script>
+        if (document.getElementById("category_slug").value.length < 1) {
                 SHOULD_AUTO_GEN_SLUG = true;
             } else {
                 SHOULD_AUTO_GEN_SLUG = false; // there is already a value in #category_slug, so lets pretend it was changed already.
             }
-        </script>
+    </script>
 
-        <input type='submit' class='btn btn-primary' value='Save Changes' >
+    <input type='submit' class='btn btn-primary' value='Save Changes'>
 
-    </form>
+</form>
 
 @endsection
