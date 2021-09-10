@@ -40,7 +40,6 @@ abstract class BaseBinshopsBlogPostRequest extends BaseRequest
             }
         };
 
-
         // generate the main set of rules:
         $return = [
             'posted_at' => ['nullable', $check_valid_posted_at],
@@ -52,7 +51,7 @@ abstract class BaseBinshopsBlogPostRequest extends BaseRequest
             'slug' => [
                 'nullable', 'string', 'min:1', 'max:150', 'alpha_dash', // this field should have some additional rules, which is done in the subclasses.
             ],
-            'categories' => ['required', 'array'],
+            'category' => ['required', 'array'],
         ];
 
 
