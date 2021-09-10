@@ -70,7 +70,7 @@ class BinshopsBlogAdminController extends Controller
      */
     public function store_post(CreateBinshopsBlogPostRequest $request)
     {
-        $new_blog_post = new BinshopsBlogPost($request->all());
+        $new_blog_post = BinshopsBlogPost::create($request->all());
 
         $this->processUploadedImages($request, $new_blog_post);
 
